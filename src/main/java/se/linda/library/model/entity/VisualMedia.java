@@ -32,9 +32,6 @@ public abstract class VisualMedia extends LibraryItem {
     @Enumerated(EnumType.STRING)
     private TranslationInfo translationInfo;
 
-
-
-    // TODO: Adjust toString() when final output format is decided.
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
