@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import se.linda.library.model.detail.SeriesInfo;
-import se.linda.library.model.enums.ItemType;
 import se.linda.library.model.enums.MediaFormat;
 import se.linda.library.model.enums.TranslationInfo;
 
@@ -17,7 +15,6 @@ import java.util.List;
 @Getter
 @Setter
 public abstract class VisualMedia extends LibraryItem {
-
 
     private String director;
 
