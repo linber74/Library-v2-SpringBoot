@@ -9,9 +9,8 @@ import java.util.List;
 
 public interface BookRepository  extends JpaRepository<Book, Long> {
 
-    List <Book> findByAuthor (String author);
+    List <Book> findByAuthorContainingIgnoreCase (String author);
     List <Book> findByBookFormat (BookFormat bookFormat);
-    List <Book> finbByFanficType (FanficType fanficType);
-    List <Book> finbByFandom (String fandom);
-
+    List <Book> findByFanficType (FanficType fanficType);
+    List <Book> findByFandomContainingIgnoreCase (String fandom);
 }
