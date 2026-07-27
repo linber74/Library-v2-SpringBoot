@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import se.linda.library.model.entity.Book;
 import se.linda.library.model.enums.BookFormat;
+import se.linda.library.model.enums.FanficType;
 import se.linda.library.repository.BookRepository;
 
 import java.util.List;
@@ -59,8 +60,18 @@ public class BookService {
     public List<Book> searchByBookFormat (BookFormat format) {
         if (format == null){
             // Todo Change exceptions later
-            throw new IllegalArgumentException("BookFormat cannot be blank");
+            throw new IllegalArgumentException("BookFormat cannot be null");
         }
         return bookRepository.findByBookFormat(format);
     }
+
+    public List<Book>  searchByFanficType (FanficType type){
+        if (type == null){
+            // Todo Change exceptions later
+            throw new IllegalArgumentException("FanficType cannot be null");
+        }
+        return bookRepository.findByFanficType(type);
+    }
+
+
 }
