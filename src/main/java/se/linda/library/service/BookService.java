@@ -73,5 +73,12 @@ public class BookService {
         return bookRepository.findByFanficType(type);
     }
 
+    public List<Book> searchByFandom (String fandom){
 
+        if (fandom == null || fandom.isBlank()){
+            throw new IllegalArgumentException(" Fandom can't be null or blank");
+        }
+
+        return bookRepository.findByFandomContainingIgnoreCase(fandom);
+    }
 }
