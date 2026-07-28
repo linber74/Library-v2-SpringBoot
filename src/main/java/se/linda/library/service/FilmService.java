@@ -6,6 +6,9 @@ import se.linda.library.model.entity.Film;
 import se.linda.library.repository.FilmRepository;
 import se.linda.library.repository.VisualMediaRepository;
 
+import java.util.List;
+import java.util.Optional;
+
 
 @Service
 @Transactional
@@ -29,6 +32,17 @@ public class FilmService {
         }
 
         return filmRepository.save(film);
+    }
+
+    public List<Film> getAll () {
+        return filmRepository.findAll();
+    }
+
+    public Film getById (Long id) {
+        return filmRepository.findById(id).orElseThrow(()
+                // Todo Change exceptions later
+            -> {return new RuntimeException("Film with id: " + id + " not found!");
+        });
     }
 
 }
