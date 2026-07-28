@@ -51,7 +51,7 @@ public class FilmService {
         if (!filmRepository.existsById(id)){
 
             // Todo Change exceptions later
-            throw new RuntimeException("Film with id: " + id + " not found");
+            throw new RuntimeException("Film with id: " + id + " not found!");
         }
         filmRepository.deleteById(id);
     }
@@ -60,9 +60,18 @@ public class FilmService {
         if (director == null || director.isBlank()){
 
             // Todo Change exceptions later
-            throw new IllegalArgumentException("Director can't be null or blank");
+            throw new IllegalArgumentException("Director can't be null or blank!");
         }
         return visualMediaRepository.findByDirectorContainingIgnoreCase(director);
     }
 
+    public List<VisualMedia> searchByActor (String actor){
+
+        if (actor == null || actor.isBlank()){
+
+            // Todo Change exceptions later
+            throw new IllegalArgumentException("Actor can't be null or blank!");
+        }
+        return visualMediaRepository.findByActorsContainingIgnoreCase(actor);
+    }
 }
