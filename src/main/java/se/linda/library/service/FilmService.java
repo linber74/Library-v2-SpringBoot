@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import se.linda.library.model.entity.Film;
 import se.linda.library.model.entity.VisualMedia;
+import se.linda.library.model.enums.MediaFormat;
 import se.linda.library.repository.FilmRepository;
 import se.linda.library.repository.VisualMediaRepository;
 
@@ -73,5 +74,15 @@ public class FilmService {
             throw new IllegalArgumentException("Actor can't be null or blank!");
         }
         return visualMediaRepository.findByActorsContainingIgnoreCase(actor);
+    }
+
+    public List<VisualMedia> searchByMediaFormat (MediaFormat format) {
+        if (format == null){
+
+            // Todo Change exceptions later
+            throw new IllegalArgumentException("Media format can't be null!");
+        }
+
+        return visualMediaRepository.findByMediaFormat(format);
     }
 }
