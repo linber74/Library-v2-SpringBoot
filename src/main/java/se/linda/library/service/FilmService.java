@@ -3,6 +3,7 @@ package se.linda.library.service;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import se.linda.library.model.entity.Film;
+import se.linda.library.model.entity.VisualMedia;
 import se.linda.library.repository.FilmRepository;
 import se.linda.library.repository.VisualMediaRepository;
 
@@ -53,6 +54,15 @@ public class FilmService {
             throw new RuntimeException("Film with id: " + id + " not found");
         }
         filmRepository.deleteById(id);
+    }
+
+    public List<VisualMedia> searchByDirector (String director){
+        if (director == null || director.isBlank()){
+
+            // Todo Change exceptions later
+            throw new IllegalArgumentException("Director can't be null or blank");
+        }
+        return visualMediaRepository.findByDirectorContainingIgnoreCase(director);
     }
 
 }
