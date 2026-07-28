@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import se.linda.library.model.entity.Film;
 import se.linda.library.model.entity.VisualMedia;
 import se.linda.library.model.enums.MediaFormat;
+import se.linda.library.model.enums.TranslationInfo;
 import se.linda.library.repository.FilmRepository;
 import se.linda.library.repository.VisualMediaRepository;
 
@@ -84,5 +85,15 @@ public class FilmService {
         }
 
         return visualMediaRepository.findByMediaFormat(format);
+    }
+
+    public List <VisualMedia> searchByTranslationsInfo (TranslationInfo info){
+        if (info == null){
+
+            // Todo Change exceptions later
+            throw new IllegalArgumentException("Translation info can't be null!");
+        }
+
+        return visualMediaRepository.findByTranslationInfo(info);
     }
 }
