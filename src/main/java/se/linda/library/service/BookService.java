@@ -48,6 +48,7 @@ public class BookService {
         }
         bookRepository.deleteById(id);
     }
+
     public List<Book> searchByAuthor (String author){
 
         if (author == null || author.isBlank()){

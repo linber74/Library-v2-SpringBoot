@@ -45,4 +45,14 @@ public class FilmService {
         });
     }
 
+    public void deleteById (Long id){
+
+        if (!filmRepository.existsById(id)){
+
+            // Todo Change exceptions later
+            throw new RuntimeException("Film with id: " + id + " not found");
+        }
+        filmRepository.deleteById(id);
+    }
+
 }
