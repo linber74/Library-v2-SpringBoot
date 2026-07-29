@@ -37,7 +37,7 @@ public class BookService {
         return bookRepository.findById(id).orElseThrow(()
 
             // Todo Change exceptions later
-            -> {return new RuntimeException("Book with id " + id + " not found");} );
+            -> new RuntimeException("Book with id " + id + " not found"));
     }
 
     public void deleteById (Long id){

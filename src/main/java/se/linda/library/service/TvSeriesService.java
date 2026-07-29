@@ -41,7 +41,7 @@ public class TvSeriesService {
         return tvSeriesRepository.findById(id).orElseThrow(()
 
                 // Todo Change exceptions later
-            -> {return new RuntimeException("TvSeries with id: " + id + " not found!");});
+            -> new RuntimeException("TvSeries with id: " + id + " not found!"));
     }
 
     public void deleteById (Long id){
