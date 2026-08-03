@@ -21,14 +21,14 @@ public class LibraryService {
 
     final BookService bookService;
     final FilmService filmService;
-    final TvSeriesService tvSeriesService;
+    final TVSeriesService tvSeriesService;
     final GameService gameService;
     final LibraryItemRepository libraryItemRepository;
     final SeasonRepository seasonRepository;
     private final SeriesInfoRepository seriesInfoRepository;
 
     public LibraryService(BookService bookService, FilmService filmService,
-                          TvSeriesService tvSeriesService, GameService gameService,
+                          TVSeriesService tvSeriesService, GameService gameService,
                           LibraryItemRepository libraryItemRepository,
                           SeasonRepository seasonRepository, SeriesInfoRepository seriesInfoRepository) {
         this.bookService = bookService;
