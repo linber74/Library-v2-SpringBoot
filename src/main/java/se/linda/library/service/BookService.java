@@ -51,6 +51,7 @@ public class BookService {
             log.warn("Book not found with id: {}", id);
             throw new ItemNotFoundException("Book with id " + id + " not found");
         }
+        log.info("deleted book with id: {}", id);
         bookRepository.deleteById(id);
     }
 
