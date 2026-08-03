@@ -14,12 +14,12 @@ import java.util.List;
 @Service
 @Transactional
 @Slf4j
-public class TvSeriesService {
+public class TVSeriesService {
 
     final TVSeriesRepository tvSeriesRepository;
     final SeasonRepository seasonRepository;
 
-    public TvSeriesService(TVSeriesRepository tvSeriesRepository,
+    public TVSeriesService(TVSeriesRepository tvSeriesRepository,
                            SeasonRepository seasonRepository) {
 
         this.tvSeriesRepository = tvSeriesRepository;
