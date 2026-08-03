@@ -1,6 +1,7 @@
 package se.linda.library.service;
 
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import se.linda.library.exception.ItemNotFoundException;
 import se.linda.library.model.entity.Season;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @Service
 @Transactional
+@Slf4j
 public class TvSeriesService {
 
     final TVSeriesRepository tvSeriesRepository;
@@ -27,9 +29,10 @@ public class TvSeriesService {
     public TVSeries save(TVSeries tvSeries) {
         if (tvSeries == null) {
 
-            // Todo Change exceptions later
+            log.warn("TvSeries can't be null!");
             throw new ItemNotFoundException("TvSeries can't be null!");
         }
+        log.info("Saved tv-series: {}", tvSeries);
         return tvSeriesRepository.save(tvSeries);
     }
 
@@ -41,17 +44,19 @@ public class TvSeriesService {
 
         return tvSeriesRepository.findById(id).orElseThrow(()
 
-                // Todo Change exceptions later
-            -> new ItemNotFoundException("TvSeries with id: " + id + " not found!"));
+            ->{ log.info("Tv-series not found with id: {}", id);
+                return new ItemNotFoundException("TvSeries with id: " + id + " not found!");});
     }
 
     public void deleteById (Long id){
 
         if(!tvSeriesRepository.existsById(id)){
 
+            log.warn("Tv-series not found with id: {}", id);
             // Todo Change exceptions later
             throw new IllegalArgumentException("TvSeries with id: " + id + " not found");
         }
+        log.info("Deleted tv-series with id: {}", id);
         tvSeriesRepository.deleteById(id);
     }
 
@@ -60,7 +65,7 @@ public class TvSeriesService {
         TVSeries tvSeries = getById(tvSeriesId);
 
         season.setTvSeries(tvSeries);
-
+        log.info("Saved season: {}", season);
         return seasonRepository.save(season);
     }
 
@@ -68,9 +73,11 @@ public class TvSeriesService {
 
         if (number < 0){
 
+            log.warn("Seasonnumber can't be 0 or less!");
             // Todo Change exceptions later
             throw new IllegalArgumentException("Seasonnumber can't be 0 or less!");
         }
+        log.info("Found by seasonnr: {}", number);
         return seasonRepository.findBySeasonNumber(number);
     }
 
@@ -78,9 +85,11 @@ public class TvSeriesService {
 
         if (tvSeries == null){
 
+            log.warn("TvSeries can't be null!");
             // Todo Change exceptions later
             throw new IllegalArgumentException("TvSeries can't be null!");
         }
+        log.info("Found By tv-series: {}", tvSeries);
         return seasonRepository.findByTvSeries(tvSeries);
     }
 }
