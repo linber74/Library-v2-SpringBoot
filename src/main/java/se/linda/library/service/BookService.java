@@ -2,6 +2,7 @@ package se.linda.library.service;
 
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import se.linda.library.exception.ItemNotFoundException;
 import se.linda.library.model.entity.Book;
 import se.linda.library.model.enums.BookFormat;
 import se.linda.library.model.enums.FanficType;
@@ -37,14 +38,14 @@ public class BookService {
         return bookRepository.findById(id).orElseThrow(()
 
             // Todo Change exceptions later
-            -> new RuntimeException("Book with id " + id + " not found"));
+            -> new ItemNotFoundException("Book with id " + id + " not found"));
     }
 
     public void deleteById (Long id){
         if (!bookRepository.existsById(id)) {
 
             // Todo Change exceptions later
-            throw new RuntimeException("Book with id " + id + " not found");
+            throw new ItemNotFoundException("Book with id " + id + " not found");
         }
         bookRepository.deleteById(id);
     }

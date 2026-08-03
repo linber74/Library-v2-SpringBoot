@@ -2,6 +2,7 @@ package se.linda.library.service;
 
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import se.linda.library.exception.ItemNotFoundException;
 import se.linda.library.model.entity.Game;
 import se.linda.library.repository.GameRepository;
 
@@ -21,7 +22,7 @@ public class GameService {
         if (game == null){
 
             // Todo Change exceptions later
-            throw new RuntimeException("Game can't be null!");
+            throw new ItemNotFoundException("Game can't be null!");
         }
         return gameRepository.save(game);
     }
@@ -35,7 +36,7 @@ public class GameService {
         return gameRepository.findById(id).orElseThrow(()
 
                 // Todo Change exceptions later
-        -> new RuntimeException("Game with id: " + id + " not found!"));
+        -> new ItemNotFoundException("Game with id: " + id + " not found!"));
     }
 
     public void deleteById (Long id){

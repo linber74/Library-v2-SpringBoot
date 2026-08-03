@@ -2,6 +2,7 @@ package se.linda.library.service;
 
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import se.linda.library.exception.ItemNotFoundException;
 import se.linda.library.model.entity.Season;
 import se.linda.library.model.entity.TVSeries;
 import se.linda.library.repository.SeasonRepository;
@@ -27,7 +28,7 @@ public class TvSeriesService {
         if (tvSeries == null) {
 
             // Todo Change exceptions later
-            throw new RuntimeException("TvSeries can't be null!");
+            throw new ItemNotFoundException("TvSeries can't be null!");
         }
         return tvSeriesRepository.save(tvSeries);
     }
@@ -41,7 +42,7 @@ public class TvSeriesService {
         return tvSeriesRepository.findById(id).orElseThrow(()
 
                 // Todo Change exceptions later
-            -> new RuntimeException("TvSeries with id: " + id + " not found!"));
+            -> new ItemNotFoundException("TvSeries with id: " + id + " not found!"));
     }
 
     public void deleteById (Long id){

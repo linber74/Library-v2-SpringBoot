@@ -2,6 +2,7 @@ package se.linda.library.service;
 
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import se.linda.library.exception.ItemNotFoundException;
 import se.linda.library.model.entity.Film;
 import se.linda.library.model.entity.VisualMedia;
 import se.linda.library.model.enums.MediaFormat;
@@ -42,7 +43,7 @@ public class FilmService {
     public Film getById (Long id) {
         return filmRepository.findById(id).orElseThrow(()
                 // Todo Change exceptions later
-            -> new RuntimeException("Film with id: " + id + " not found!"));
+            -> new ItemNotFoundException("Film with id: " + id + " not found!"));
     }
 
     public void deleteById (Long id){
@@ -50,7 +51,7 @@ public class FilmService {
         if (!filmRepository.existsById(id)){
 
             // Todo Change exceptions later
-            throw new RuntimeException("Film with id: " + id + " not found!");
+            throw new ItemNotFoundException("Film with id: " + id + " not found!");
         }
         filmRepository.deleteById(id);
     }

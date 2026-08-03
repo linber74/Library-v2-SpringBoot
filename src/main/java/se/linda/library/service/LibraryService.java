@@ -2,6 +2,7 @@ package se.linda.library.service;
 
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import se.linda.library.exception.ItemNotFoundException;
 import se.linda.library.model.detail.SeriesInfo;
 import se.linda.library.model.entity.LibraryItem;
 import se.linda.library.model.enums.ItemType;
@@ -46,7 +47,7 @@ public class LibraryService {
         return libraryItemRepository.findById(id).orElseThrow(()
 
                 // Todo Change exceptions later
-            -> new RuntimeException("Object with id: " + id + " not found!"));
+            -> new ItemNotFoundException("Object with id: " + id + " not found!"));
     }
 
     public List<LibraryItem> getAllByType (ItemType itemType){
