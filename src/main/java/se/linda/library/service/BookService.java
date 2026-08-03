@@ -62,7 +62,7 @@ public class BookService {
             // Todo Change exceptions later
             throw new IllegalArgumentException("Author cannot be null or blank");
         }
-        log.info("Getting Author: {}", author);
+        log.info("Found by Author: {}", author);
         return bookRepository.findByAuthorContainingIgnoreCase(author);
     }
 
@@ -72,7 +72,7 @@ public class BookService {
             // Todo Change exceptions later
             throw new IllegalArgumentException("BookFormat can't be null");
         }
-        log.info("Getting book format: {}", format);
+        log.info("Found by book format: {}", format);
         return bookRepository.findByBookFormat(format);
     }
 
@@ -83,7 +83,7 @@ public class BookService {
             // Todo Change exceptions later
             throw new IllegalArgumentException("FanficType can't be null");
         }
-        log.info("Getting fanfic type: {}", type);
+        log.info("Found by fanfic type: {}", type);
         return bookRepository.findByFanficType(type);
     }
 
@@ -93,7 +93,7 @@ public class BookService {
             log.warn("Fandom can't be null or blank");
             throw new IllegalArgumentException("Fandom can't be null or blank");
         }
-        log.info("Getting fandom: {}", fandom);
+        log.info("Found by fandom: {}", fandom);
         return bookRepository.findByFandomContainingIgnoreCase(fandom);
     }
 }

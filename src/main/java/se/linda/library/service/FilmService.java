@@ -68,7 +68,7 @@ public class FilmService {
             // Todo Change exceptions later
             throw new IllegalArgumentException("Director can't be null or blank!");
         }
-        log.info("Getting Director: {}", director);
+        log.info("Found by Director: {}", director);
         return visualMediaRepository.findByDirectorContainingIgnoreCase(director);
     }
 
@@ -80,7 +80,7 @@ public class FilmService {
             // Todo Change exceptions later
             throw new IllegalArgumentException("Actor can't be null or blank!");
         }
-        log.info("Getting Actor: {}", actor);
+        log.info("Found by Actor: {}", actor);
         return visualMediaRepository.findByActorsContainingIgnoreCase(actor);
     }
 
@@ -91,7 +91,7 @@ public class FilmService {
             // Todo Change exceptions later
             throw new IllegalArgumentException("Media format can't be null!");
         }
-        log.info("Getting Media format: {}", format);
+        log.info("Found by Media format: {}", format);
         return visualMediaRepository.findByMediaFormat(format);
     }
 
@@ -101,7 +101,7 @@ public class FilmService {
             // Todo Change exceptions later
             throw new IllegalArgumentException("Translation info can't be null!");
         }
-        log.info("Getting translation: {}", info);
+        log.info("Found by translation: {}", info);
         return visualMediaRepository.findByTranslationInfo(info);
     }
 }

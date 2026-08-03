@@ -60,7 +60,7 @@ public class LibraryService {
             // Todo Change exceptions later
             throw new IllegalArgumentException("Itemtype can't be null!");
         }
-        log.info("Getting item type: {}", itemType);
+        log.info("Found by item type: {}", itemType);
         return libraryItemRepository.findByItemType(itemType);
     }
 
@@ -72,7 +72,7 @@ public class LibraryService {
             // Todo Change exceptions later
             throw new IllegalArgumentException("Language can't be null or blank");
         }
-        log.info("Getting by Language: {}", language);
+        log.info("Found by Language: {}", language);
         return libraryItemRepository.findByLanguage(language);
     }
 
@@ -83,7 +83,7 @@ public class LibraryService {
             // Todo Change exceptions later
             throw new IllegalArgumentException("Title can't be null or blank");
         }
-        log.info("Getting Title: {}", title);
+        log.info("Found by Title: {}", title);
         return libraryItemRepository.findByTitleContainingIgnoreCase(title);
     }
 
@@ -94,7 +94,7 @@ public class LibraryService {
             // Todo Change exceptions later
             throw new IllegalArgumentException("Publishingyear can't be 0 or lower");
         }
-        log.info("Getting from publishing year: {}", year);
+        log.info("Found by publishing year: {}", year);
         return libraryItemRepository.findByPublishYear(year);
     }
 

@@ -61,7 +61,7 @@ public class GameService {
             // Todo Change exceptions later
             throw new IllegalArgumentException("Creator can't be found!");
         }
-        log.info("Getting creator: {}", creator);
+        log.info("Found by creator: {}", creator);
         return gameRepository.findByCreator(creator);
     }
 }
