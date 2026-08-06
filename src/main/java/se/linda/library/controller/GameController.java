@@ -18,7 +18,7 @@ public class GameController {
     }
 
     @GetMapping
-    List<Game> getAll (){
+    public List<Game> getAll (){
         return gameService.getAll();
     }
 
@@ -28,7 +28,7 @@ public class GameController {
     }
 
     @PostMapping
-    public Game save (@RequestParam Game game){
+    public Game save (@RequestBody Game game){
         return gameService.save(game);
     }
 

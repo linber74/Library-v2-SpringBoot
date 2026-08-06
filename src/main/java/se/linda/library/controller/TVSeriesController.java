@@ -9,7 +9,7 @@ import se.linda.library.service.TVSeriesService;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/tvseries")
+@RequestMapping("/api/tvseries")
 public class TVSeriesController {
 
     final TVSeriesService tvSeriesService;
@@ -45,7 +45,7 @@ public class TVSeriesController {
     }
 
     @GetMapping ("/search/season")
-    public List<Season> searchBySeasonNumber(@RequestBody int nr){
+    public List<Season> searchBySeasonNumber(@RequestParam int nr){
         return tvSeriesService.searchBySeasonNumber(nr);
     }
 
