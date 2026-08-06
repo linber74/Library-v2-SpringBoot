@@ -17,7 +17,7 @@ public class BookMapper {
             seriesInfo.setSeriesName(request.seriesName());
         }
 
-       Book book = new Book();
+        Book book = new Book();
         book.setTitle(request.title());
         book.setGenre(request.genre());
         book.setLanguage(request.language());
