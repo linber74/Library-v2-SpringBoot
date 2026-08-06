@@ -59,7 +59,6 @@ public class BookService {
 
         if (author == null || author.isBlank()){
             log.warn("Author cannot be null or blank");
-            // Todo Change exceptions later
             throw new IllegalArgumentException("Author cannot be null or blank");
         }
         log.info("Found by Author: {}", author);
@@ -69,7 +68,6 @@ public class BookService {
     public List<Book> searchByBookFormat (BookFormat format) {
         if (format == null){
             log.warn("BookFormat can't be null");
-            // Todo Change exceptions later
             throw new IllegalArgumentException("BookFormat can't be null");
         }
         log.info("Found by book format: {}", format);
@@ -80,7 +78,6 @@ public class BookService {
         if (type == null){
 
             log.warn("FanficType can't be null");
-            // Todo Change exceptions later
             throw new IllegalArgumentException("FanficType can't be null");
         }
         log.info("Found by fanfic type: {}", type);

@@ -30,7 +30,7 @@ public class TVSeriesService {
         if (tvSeries == null) {
 
             log.warn("TvSeries can't be null!");
-            throw new ItemNotFoundException("TvSeries can't be null!");
+            throw new IllegalArgumentException("TvSeries can't be null!");
         }
         log.info("Saved tv-series: {}", tvSeries);
         return tvSeriesRepository.save(tvSeries);
@@ -53,8 +53,7 @@ public class TVSeriesService {
         if(!tvSeriesRepository.existsById(id)){
 
             log.warn("Tv-series not found with id: {}", id);
-            // Todo Change exceptions later
-            throw new IllegalArgumentException("TvSeries with id: " + id + " not found");
+            throw new ItemNotFoundException("TvSeries with id: " + id + " not found");
         }
         log.info("Deleted tv-series with id: {}", id);
         tvSeriesRepository.deleteById(id);
@@ -74,7 +73,6 @@ public class TVSeriesService {
         if (number < 0){
 
             log.warn("Seasonnumber can't be 0 or less!");
-            // Todo Change exceptions later
             throw new IllegalArgumentException("Seasonnumber can't be 0 or less!");
         }
         log.info("Found by seasonnr: {}", number);
@@ -86,7 +84,6 @@ public class TVSeriesService {
         if (tvSeries == null){
 
             log.warn("TvSeries can't be null!");
-            // Todo Change exceptions later
             throw new IllegalArgumentException("TvSeries can't be null!");
         }
         log.info("Found By tv-series: {}", tvSeries);

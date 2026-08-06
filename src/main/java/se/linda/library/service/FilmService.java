@@ -32,7 +32,6 @@ public class FilmService {
     public Film save (Film film){
         if (film == null) {
             log.warn("Film can't be null");
-            // Todo Change exceptions later
             throw new IllegalArgumentException("Film can't be null");
         }
         log.info("Saving Film: {}",film);
@@ -65,7 +64,6 @@ public class FilmService {
         if (director == null || director.isBlank()){
 
             log.warn("Director can't be null or blank!");
-            // Todo Change exceptions later
             throw new IllegalArgumentException("Director can't be null or blank!");
         }
         log.info("Found by Director: {}", director);
@@ -77,7 +75,6 @@ public class FilmService {
         if (actor == null || actor.isBlank()){
 
             log.warn("Actor can't be null or blank!");
-            // Todo Change exceptions later
             throw new IllegalArgumentException("Actor can't be null or blank!");
         }
         log.info("Found by Actor: {}", actor);
@@ -88,7 +85,6 @@ public class FilmService {
         if (format == null){
 
             log.warn("Media format can't be null!");
-            // Todo Change exceptions later
             throw new IllegalArgumentException("Media format can't be null!");
         }
         log.info("Found by Media format: {}", format);
@@ -98,7 +94,6 @@ public class FilmService {
     public List <VisualMedia> searchByTranslationsInfo (TranslationInfo info){
         if (info == null){
             log.warn("Translation info can't be null!");
-            // Todo Change exceptions later
             throw new IllegalArgumentException("Translation info can't be null!");
         }
         log.info("Found by translation: {}", info);

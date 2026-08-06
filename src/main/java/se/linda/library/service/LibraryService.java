@@ -57,7 +57,6 @@ public class LibraryService {
 
         if (itemType == null){
             log.warn("Item type can't be null!");
-            // Todo Change exceptions later
             throw new IllegalArgumentException("Itemtype can't be null!");
         }
         log.info("Found by item type: {}", itemType);
@@ -69,7 +68,6 @@ public class LibraryService {
         if (language == null || language.isBlank()){
 
             log.warn("Language can't be null or blank");
-            // Todo Change exceptions later
             throw new IllegalArgumentException("Language can't be null or blank");
         }
         log.info("Found by Language: {}", language);
@@ -80,7 +78,6 @@ public class LibraryService {
 
         if (title == null || title.isBlank()){
             log.warn("Title can't be null or blank");
-            // Todo Change exceptions later
             throw new IllegalArgumentException("Title can't be null or blank");
         }
         log.info("Found by Title: {}", title);
@@ -89,9 +86,8 @@ public class LibraryService {
 
     public List<LibraryItem> getAllByPublishYear (Integer year){
 
-        if (year < 0){
+        if (year == null ||year < 0){
             log.warn("Publishingyear can't be 0 or lower");
-            // Todo Change exceptions later
             throw new IllegalArgumentException("Publishingyear can't be 0 or lower");
         }
         log.info("Found by publishing year: {}", year);
@@ -102,8 +98,7 @@ public class LibraryService {
 
         if (!libraryItemRepository.existsById(id)){
             log.warn(" Object not found with id: {}", id);
-            // Todo Change exceptions later
-            throw new IllegalArgumentException("Object with id: " + id + " not found");
+            throw new ItemNotFoundException("Object with id: " + id + " not found");
         }
         log.info("Deleted object with id: {}", id);
         libraryItemRepository.deleteById(id);

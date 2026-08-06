@@ -24,7 +24,7 @@ public class GameService {
         if (game == null){
 
             log.warn("Game can't be null!");
-            throw new ItemNotFoundException("Game can't be null!");
+            throw new IllegalArgumentException("Game can't be null!");
         }
         log.info("Saved Game: {}", game);
         return gameRepository.save(game);
@@ -38,7 +38,7 @@ public class GameService {
 
         return gameRepository.findById(id).orElseThrow(()
 
-        -> { log.warn("Game not found With íd: {}", id);
+        -> { log.warn("Game not found With id: {}", id);
         return new ItemNotFoundException("Game with id: " + id + " not found!");});
     }
 
@@ -47,8 +47,7 @@ public class GameService {
         if(!gameRepository.existsById(id)){
 
             log.warn("Game not found with id: {}", id);
-            // Todo Change exceptions later
-            throw new IllegalArgumentException("Game with id: " + id + " not found!");
+            throw new ItemNotFoundException("Game with id: " + id + " not found!");
         }
         log.info("Deleted Game with id: {}",id);
         gameRepository.deleteById(id);
@@ -56,9 +55,8 @@ public class GameService {
 
     public List<Game> searchByCreator (String creator){
 
-        if (creator == null){
+        if (creator == null || creator.isBlank()){
             log.warn("Creator can't be found!");
-            // Todo Change exceptions later
             throw new IllegalArgumentException("Creator can't be found!");
         }
         log.info("Found by creator: {}", creator);
