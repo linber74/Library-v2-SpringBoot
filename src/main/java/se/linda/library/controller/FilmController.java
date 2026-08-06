@@ -2,6 +2,9 @@ package se.linda.library.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import se.linda.library.dto.request.FilmRequest;
+import se.linda.library.dto.response.FilmResponse;
+import se.linda.library.mapper.FilmMapper;
 import se.linda.library.model.entity.Film;
 import se.linda.library.model.entity.VisualMedia;
 import se.linda.library.model.enums.MediaFormat;
@@ -15,24 +18,32 @@ import java.util.List;
 public class FilmController {
 
     final FilmService filmService;
+    final FilmMapper filmMapper;
 
-    public FilmController(FilmService filmService) {
+    public FilmController(FilmService filmService, FilmMapper filmMapper) {
         this.filmService = filmService;
+        this.filmMapper = filmMapper;
     }
 
     @GetMapping
-    public List<Film> getAll(){
-        return filmService.getAll();
+    public List<FilmResponse> getAll(){
+        return filmService.getAll()
+                .stream()
+                .map(filmMapper ::toResponse)
+                .toList();
     }
 
     @GetMapping("/{id}")
-    public Film getById (@PathVariable Long id){
-        return filmService.getById(id);
+    public FilmResponse getById (@PathVariable Long id){
+        Film film = filmService.getById(id);
+        return filmMapper.toResponse(film);
     }
 
     @PostMapping
-    public Film save (@RequestBody Film film){
-        return filmService.save(film);
+    public FilmResponse save (@RequestBody FilmRequest request){
+        Film film = filmMapper.toEntity(request);
+        Film saved = filmService.save(film);
+        return filmMapper.toResponse(saved);
     }
 
     @DeleteMapping ("/{id}")
@@ -42,22 +53,34 @@ public class FilmController {
     }
 
     @GetMapping ("/search/director")
-    public List<VisualMedia> searchByDirector(@RequestParam String director){
-        return filmService.searchByDirector(director);
+    public List<FilmResponse> searchByDirector(@RequestParam String director){
+        return filmService.searchByDirector(director)
+                .stream()
+                .map(vm -> filmMapper.toResponse((Film)vm))
+                .toList();
     }
 
     @GetMapping ("/search/actor")
-    public List<VisualMedia> searchByActor (@RequestParam String actor){
-        return filmService.searchByActor(actor);
+    public List<FilmResponse> searchByActor (@RequestParam String actor){
+        return filmService.searchByActor(actor)
+                .stream()
+                .map(vm -> filmMapper.toResponse((Film)vm))
+                .toList();
     }
 
     @GetMapping ("/search/format")
-    public List<VisualMedia> searchByMediaFormat (@RequestParam MediaFormat format){
-        return filmService.searchByMediaFormat(format);
+    public List<FilmResponse> searchByMediaFormat (@RequestParam MediaFormat format){
+        return filmService.searchByMediaFormat(format)
+                .stream()
+                .map(vm -> filmMapper.toResponse((Film)vm))
+                .toList();
     }
 
     @GetMapping ("/search/translation")
-    public List<VisualMedia> searchByTranslation(@RequestParam TranslationInfo info){
-        return filmService.searchByTranslationsInfo(info);
+    public List<FilmResponse> searchByTranslation(@RequestParam TranslationInfo info){
+        return filmService.searchByTranslationsInfo(info)
+                .stream()
+                .map(vm -> filmMapper.toResponse((Film)vm))
+                .toList();
     }
 }

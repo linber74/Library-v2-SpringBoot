@@ -2,6 +2,9 @@ package se.linda.library.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import se.linda.library.dto.request.TVSeriesRequest;
+import se.linda.library.dto.response.TVSeriesResponse;
+import se.linda.library.mapper.TVSeriesMapper;
 import se.linda.library.model.entity.Season;
 import se.linda.library.model.entity.TVSeries;
 import se.linda.library.service.TVSeriesService;
@@ -13,24 +16,32 @@ import java.util.List;
 public class TVSeriesController {
 
     final TVSeriesService tvSeriesService;
+    final TVSeriesMapper tvSeriesMapper;
 
-    public TVSeriesController(TVSeriesService tvSeriesService) {
+    public TVSeriesController(TVSeriesService tvSeriesService, TVSeriesMapper tvSeriesMapper) {
         this.tvSeriesService = tvSeriesService;
+        this.tvSeriesMapper = tvSeriesMapper;
     }
 
     @GetMapping
-    public List<TVSeries> getAll(){
-        return tvSeriesService.getAll();
+    public List<TVSeriesResponse> getAll() {
+        return tvSeriesService.getAll()
+                .stream()
+                .map(tvSeriesMapper :: toResponse)
+                .toList();
     }
 
     @GetMapping("/{id}")
-    public TVSeries getById (@PathVariable Long id){
-        return tvSeriesService.getById(id);
+    public TVSeriesResponse getById (@PathVariable Long id){
+        TVSeries tvSeries = tvSeriesService.getById(id);
+        return tvSeriesMapper.toResponse(tvSeries);
     }
 
     @PostMapping
-    public TVSeries save (@RequestBody TVSeries series){
-        return tvSeriesService.save(series);
+    public TVSeriesResponse save (@RequestBody TVSeriesRequest request){
+        TVSeries tvSeries = tvSeriesMapper.toEntity(request);
+        TVSeries saved = tvSeriesService.save(tvSeries);
+        return tvSeriesMapper.toResponse(saved);
     }
 
     @DeleteMapping("/{id}")
