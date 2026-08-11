@@ -1,5 +1,6 @@
 package se.linda.library.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.linda.library.dto.request.FilmRequest;
@@ -40,7 +41,7 @@ public class FilmController {
     }
 
     @PostMapping
-    public FilmResponse save (@RequestBody FilmRequest request){
+    public FilmResponse save (@Valid @RequestBody FilmRequest request){
         Film film = filmMapper.toEntity(request);
         Film saved = filmService.save(film);
         return filmMapper.toResponse(saved);
