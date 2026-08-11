@@ -24,14 +24,14 @@ import static org.mockito.Mockito.*;
 public class BookServiceTest {
 
     @Mock
-    BookRepository bookRepository;
+    private BookRepository bookRepository;
 
     @InjectMocks
-    BookService bookService;
+    private BookService bookService;
 
-    Book testBook;
-    Book testBook2;
-    Book testBook3;
+    private Book testBook;
+    private Book testBook2;
+    private Book testBook3;
     List<Book> testAllBooks;
 
     @BeforeEach
