@@ -1,5 +1,6 @@
 package se.linda.library.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.linda.library.dto.request.BookRequest;
@@ -39,7 +40,7 @@ public class BookController {
     }
 
     @PostMapping
-    public BookResponse save (@RequestBody BookRequest request){
+    public BookResponse save (@Valid @RequestBody BookRequest request){
         Book book = bookMapper.toEntity(request);
         Book saved = bookService.save(book);
         return bookMapper.toResponse(saved);
