@@ -1,5 +1,6 @@
 package se.linda.library.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.linda.library.dto.request.TVSeriesRequest;
@@ -38,7 +39,7 @@ public class TVSeriesController {
     }
 
     @PostMapping
-    public TVSeriesResponse save (@RequestBody TVSeriesRequest request){
+    public TVSeriesResponse save (@Valid @RequestBody TVSeriesRequest request){
         TVSeries tvSeries = tvSeriesMapper.toEntity(request);
         TVSeries saved = tvSeriesService.save(tvSeries);
         return tvSeriesMapper.toResponse(saved);
