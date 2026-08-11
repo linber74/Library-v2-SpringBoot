@@ -1,5 +1,6 @@
 package se.linda.library.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.linda.library.dto.request.GameRequest;
@@ -37,7 +38,7 @@ public class GameController {
     }
 
     @PostMapping
-    public GameResponse save (@RequestBody GameRequest request){
+    public GameResponse save (@Valid @RequestBody GameRequest request){
         Game game = gameMapper.toEntity(request);
         Game saved = gameService.save(game);
         return gameMapper.toResponse(saved);
