@@ -7,7 +7,7 @@ public enum ItemType {
     TV_SERIES ("TV-serie"),
     GAME ("Spel"),
     SHORT_DRAMA ("Short Drama"),
-    AUDIO_STORY ("Audio Story"),;
+    AUDIO_STORY ("Audio Story");
 
     public final String type;
 
