@@ -48,4 +48,12 @@ public class AudioStoryController {
         service.deleteById(id);
         return ResponseEntity.noContent().build();
    }
+
+   @GetMapping("/search/duration")
+    public List<AudioStoryResponse> searchByDuration(@RequestParam Integer min, @RequestParam Integer max) {
+        return service.searchByDuration(min, max)
+                .stream()
+                .map(mapper::toResponse)
+                .toList();
+   }
 }

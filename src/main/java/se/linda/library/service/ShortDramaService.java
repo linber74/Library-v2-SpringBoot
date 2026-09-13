@@ -50,4 +50,25 @@ public class ShortDramaService {
         log.info("Deleting Short Drama {}", id);
         shortDramaRepository.deleteById(id);
     }
+
+    public List<ShortDrama> searchByDuration(Integer min, Integer max) {
+
+        if(min == null || max == null) {
+            log.warn("Min and max duration can't be null");
+            throw new IllegalArgumentException("Min and max duration can't be null");
+        }
+
+        if(min < 0 || max < 0) {
+            log.warn("Duration values can't be negative");
+            throw new IllegalArgumentException("Duration values can't be negative");
+        }
+
+        if(min > max) {
+            log.warn("Min and max duration can't be greater than max");
+            throw new IllegalArgumentException("Min and max duration can't be greater than max");
+        }
+
+        log.info("Found by duration between: {} and {}", min, max);
+        return shortDramaRepository.findByDurationSecondsBetween(min, max);
+    }
 }
