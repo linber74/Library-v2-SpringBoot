@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import se.linda.library.dto.request.ShortDramaRequest;
 import se.linda.library.dto.response.ShortDramaResponse;
 import se.linda.library.model.entity.ShortDrama;
+import se.linda.library.model.enums.ItemType;
 
 @Component
 public class ShortDramaMapper {
@@ -15,6 +16,8 @@ public class ShortDramaMapper {
         shortDrama.setLanguage(request.language());
         shortDrama.setTropeGenre(request.tropeGenre());
         shortDrama.setDurationSeconds(request.durationSeconds());
+        shortDrama.setItemType(ItemType.SHORT_DRAMA);
+        shortDrama.setSynopsis(request.synopsis());
 
         return shortDrama;
     }
@@ -26,7 +29,8 @@ public class ShortDramaMapper {
                 drama.getTitle(),
                 drama.getLanguage(),
                 drama.getTropeGenre(),
-                drama.getDurationSeconds()
+                drama.getDurationSeconds(),
+                drama.getSynopsis()
         );
     }
 }

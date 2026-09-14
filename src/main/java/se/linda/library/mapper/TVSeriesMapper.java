@@ -27,6 +27,7 @@ public class TVSeriesMapper {
         tvSeries.setMediaFormat(request.mediaFormat());
         tvSeries.setTranslationInfo(request.translationInfo());
         tvSeries.setItemType(ItemType.TV_SERIES);
+        tvSeries.setSynopsis(request.synopsis());
 
         return tvSeries;
     }
@@ -39,6 +40,6 @@ public class TVSeriesMapper {
         return new TVSeriesResponse(tvSeries.getId(), tvSeries.getTitle(),
                 tvSeries.getGenre(), tvSeries.getLanguage(), seriesName,
                 tvSeries.getDirector(), tvSeries.getActors(),
-                tvSeries.getMediaFormat(), tvSeries.getTranslationInfo());
+                tvSeries.getMediaFormat(), tvSeries.getTranslationInfo(), tvSeries.getSynopsis());
     }
 }

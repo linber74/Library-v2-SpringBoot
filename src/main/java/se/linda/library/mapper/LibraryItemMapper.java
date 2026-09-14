@@ -12,6 +12,6 @@ public class LibraryItemMapper {
                 : null;
 
         return new LibraryItemResponse(item.getId(), item.getItemType(), item.getTitle(),
-                item.getGenre(), item.getLanguage(), seriesName);
+                item.getGenre(), item.getLanguage(), seriesName, item.getSynopsis());
     }
 }

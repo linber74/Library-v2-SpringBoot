@@ -8,5 +8,6 @@ import java.util.List;
 public record TVSeriesResponse(Long id, String title, List<String> genre,
                                String language, String seriesName,
                                String director, List<String> actors,
-                               MediaFormat mediaFormat, TranslationInfo translationInfo) {
+                               MediaFormat mediaFormat, TranslationInfo translationInfo,
+                               String synopsis) {
 }

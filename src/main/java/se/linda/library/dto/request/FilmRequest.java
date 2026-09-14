@@ -2,6 +2,7 @@ package se.linda.library.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import se.linda.library.model.enums.MediaFormat;
 import se.linda.library.model.enums.TranslationInfo;
 
@@ -14,4 +15,5 @@ public record FilmRequest(@NotBlank (message = "Title is required") String title
                           @NotBlank (message = "Director is required (use 'Unknown' if not known)") String director,
                           List<String> actors,
                           @NotNull (message = "MediaFormat is required") MediaFormat mediaFormat,
-                          TranslationInfo translationInfo) {}
+                          TranslationInfo translationInfo,
+                          @Size(max = 1000) String synopsis) {}
