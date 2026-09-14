@@ -24,6 +24,7 @@ public class GameMapper {
         game.setSeriesInfo(seriesInfo);
         game.setCreator(request.creator());
         game.setItemType(ItemType.GAME);
+        game.setSynopsis(request.synopsis());
 
         return game;
     }
@@ -35,6 +36,6 @@ public class GameMapper {
 
         return new GameResponse(game.getId(), game.getTitle(),
                 game.getGenre(), game.getLanguage(),
-                seriesName, game.getCreator());
+                seriesName, game.getCreator(), game.getSynopsis());
     }
 }

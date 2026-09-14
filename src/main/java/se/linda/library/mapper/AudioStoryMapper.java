@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import se.linda.library.dto.request.AudioStoryRequest;
 import se.linda.library.dto.response.AudioStoryResponse;
 import se.linda.library.model.entity.AudioStory;
+import se.linda.library.model.enums.ItemType;
 
 @Component
 public class AudioStoryMapper {
@@ -15,6 +16,8 @@ public class AudioStoryMapper {
         audioStory.setLanguage(request.language());
         audioStory.setTropeGenre(request.tropeGenre());
         audioStory.setDurationSeconds(request.durationSeconds());
+        audioStory.setItemType(ItemType.AUDIO_STORY);
+        audioStory.setSynopsis(request.synopsis());
 
         return audioStory;
     }
@@ -26,7 +29,8 @@ public class AudioStoryMapper {
                 story.getTitle(),
                 story.getLanguage(),
                 story.getTropeGenre(),
-                story.getDurationSeconds()
+                story.getDurationSeconds(),
+                story.getSynopsis()
         );
     }
 }

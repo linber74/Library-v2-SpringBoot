@@ -27,6 +27,7 @@ public class FilmMapper {
         film.setMediaFormat(request.mediaFormat());
         film.setTranslationInfo(request.translationInfo());
         film.setItemType(ItemType.FILM);
+        film.setSynopsis(request.synopsis());
 
         return film;
     }
@@ -39,6 +40,6 @@ public class FilmMapper {
         return new FilmResponse(film.getId(), film.getTitle(),
                 film.getGenre(), film.getLanguage(), seriesName,
                 film.getDirector(), film.getActors(),
-                film.getMediaFormat(), film.getTranslationInfo());
+                film.getMediaFormat(), film.getTranslationInfo(), film.getSynopsis());
     }
 }

@@ -27,6 +27,7 @@ public class BookMapper {
         book.setFanficType(request.fanficType());
         book.setFandom(request.fandom());
         book.setItemType(ItemType.BOOK);
+        book.setSynopsis(request.synopsis());
 
         return book;
     }
@@ -38,7 +39,6 @@ public class BookMapper {
 
         return new BookResponse(book.getId(), book.getTitle(),
                 book.getGenre(), book.getLanguage(), seriesName, book.getAuthor(),
-                book.getBookFormat(), book.getFanficType(), book.getFandom());
+                book.getBookFormat(), book.getFanficType(), book.getFandom(), book.getSynopsis());
     }
-
 }
