@@ -19,7 +19,7 @@ public class SeriesInfo {
     @Id
     private String seriesName;
 
-    private int partNumber;
+    private Integer partNumber;
 
     @Override
     public String toString() {

@@ -6,7 +6,7 @@ import se.linda.library.model.enums.TranslationInfo;
 import java.util.List;
 
 public record TVSeriesResponse(Long id, String title, List<String> genre,
-                               String language, String seriesName,
+                               String language, String seriesName, Integer seriesPartNumber,
                                String director, List<String> actors,
                                MediaFormat mediaFormat, TranslationInfo translationInfo,
                                String synopsis) {

@@ -9,6 +9,7 @@ public record GameRequest(@NotBlank (message = "Title is required") String title
                           List<String> genre,
                           @NotBlank (message = "Language is required") String language,
                           String seriesName,
+                          Integer seriesPartNumber,
                           String creator,
                           @Size(max = 1000) String synopsis) {
 }

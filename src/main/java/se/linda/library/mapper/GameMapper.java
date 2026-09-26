@@ -15,6 +15,7 @@ public class GameMapper {
         if(request.seriesName() != null) {
             seriesInfo = new SeriesInfo();
             seriesInfo.setSeriesName(request.seriesName());
+            seriesInfo.setPartNumber(request.seriesPartNumber());
         }
 
         Game game = new Game();
@@ -33,9 +34,12 @@ public class GameMapper {
         String seriesName = game.getSeriesInfo()  != null
                 ? game.getSeriesInfo().getSeriesName()
                 : null;
+        Integer seriesPartNumber = game.getSeriesInfo() != null
+                ? game.getSeriesInfo().getPartNumber()
+                : null;
 
         return new GameResponse(game.getId(), game.getTitle(),
                 game.getGenre(), game.getLanguage(),
-                seriesName, game.getCreator(), game.getSynopsis());
+                seriesName, seriesPartNumber, game.getCreator(), game.getSynopsis());
     }
 }
