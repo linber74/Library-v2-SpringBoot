@@ -15,6 +15,7 @@ public class BookMapper {
         if (request.seriesName() != null){
             seriesInfo = new SeriesInfo();
             seriesInfo.setSeriesName(request.seriesName());
+            seriesInfo.setPartNumber(request.seriesPartNumber());
         }
 
         Book book = new Book();
@@ -36,9 +37,12 @@ public class BookMapper {
         String seriesName = book.getSeriesInfo() != null
                 ? book.getSeriesInfo().getSeriesName()
                 :null;
+        Integer seriesPartNumber = book.getSeriesInfo() != null
+                ? book.getSeriesInfo().getPartNumber()
+                :null;
 
         return new BookResponse(book.getId(), book.getTitle(),
-                book.getGenre(), book.getLanguage(), seriesName, book.getAuthor(),
+                book.getGenre(), book.getLanguage(), seriesName, seriesPartNumber, book.getAuthor(),
                 book.getBookFormat(), book.getFanficType(), book.getFandom(), book.getSynopsis());
     }
 }

@@ -12,6 +12,7 @@ public record TVSeriesRequest (@NotBlank(message = "Title is required") String t
                                List<String> genre,
                                @NotBlank (message = "Language is required") String language,
                                String seriesName,
+                               Integer seriesPartNumber,
                                @NotBlank (message = "Director is required (use 'Unknown' if not known)") String director,
                                List<String> actors,
                                @NotNull(message = "MediaFormat is required") MediaFormat mediaFormat,

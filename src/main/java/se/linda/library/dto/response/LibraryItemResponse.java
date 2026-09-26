@@ -6,4 +6,4 @@ import java.util.List;
 
 public record LibraryItemResponse(Long id, ItemType itemType, String title,
                                   List<String> genre, String language,
-                                  String seriesName, String synopsis) {}
+                                  String seriesName, Integer seriesPartNumber, String synopsis) {}

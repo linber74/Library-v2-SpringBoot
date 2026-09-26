@@ -15,6 +15,7 @@ public class FilmMapper {
         if (request.seriesName() != null){
             seriesInfo = new SeriesInfo();
             seriesInfo.setSeriesName(request.seriesName());
+            seriesInfo.setPartNumber(request.seriesPartNumber());
         }
 
         Film film = new Film();
@@ -36,9 +37,12 @@ public class FilmMapper {
         String seriesName = film.getSeriesInfo() != null
                 ? film.getSeriesInfo().getSeriesName()
                 : null;
+        Integer seriesPartNumber = film.getSeriesInfo() != null
+                ? film.getSeriesInfo().getPartNumber()
+                : null;
 
         return new FilmResponse(film.getId(), film.getTitle(),
-                film.getGenre(), film.getLanguage(), seriesName,
+                film.getGenre(), film.getLanguage(), seriesName, seriesPartNumber,
                 film.getDirector(), film.getActors(),
                 film.getMediaFormat(), film.getTranslationInfo(), film.getSynopsis());
     }

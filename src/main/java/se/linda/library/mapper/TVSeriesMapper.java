@@ -15,7 +15,9 @@ public class TVSeriesMapper {
         if (request.seriesName() != null) {
             seriesInfo = new SeriesInfo();
             seriesInfo.setSeriesName(request.seriesName());
+            seriesInfo.setPartNumber(request.seriesPartNumber());
         }
+
 
         TVSeries tvSeries = new TVSeries();
         tvSeries.setTitle(request.title());
@@ -36,9 +38,12 @@ public class TVSeriesMapper {
         String seriesName = tvSeries.getSeriesInfo() != null
                 ? tvSeries.getSeriesInfo().getSeriesName()
                 : null;
+        Integer seriesPartNumber = tvSeries.getSeriesInfo() != null
+                ? tvSeries.getSeriesInfo().getPartNumber()
+                : null;
 
         return new TVSeriesResponse(tvSeries.getId(), tvSeries.getTitle(),
-                tvSeries.getGenre(), tvSeries.getLanguage(), seriesName,
+                tvSeries.getGenre(), tvSeries.getLanguage(), seriesName, seriesPartNumber,
                 tvSeries.getDirector(), tvSeries.getActors(),
                 tvSeries.getMediaFormat(), tvSeries.getTranslationInfo(), tvSeries.getSynopsis());
     }
