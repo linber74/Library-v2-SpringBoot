@@ -217,4 +217,19 @@ public class LibraryServiceTest {
         List<SeriesInfo> result = libraryService.getAllSeriesInfo();
         assertEquals(1, result.size());
     }
+
+    @Test
+    public void getAllGenres_shouldReturnDistinctGenres(){
+        when(libraryItemRepository.findDistinctGenres()).thenReturn(List.of("Fantasy", "Romance", "Sci-fi"));
+        List<String> result = libraryService.getAllGenres();
+        assertEquals(3, result.size());
+        assertEquals(List.of("Fantasy", "Romance", "Sci-fi"), result);
+    }
+
+    @Test
+    public  void getAllGenres_shouldReturnEmptyList_whenNoGenresFound(){
+        when(libraryItemRepository.findDistinctGenres()).thenReturn(List.of());
+        List<String> result = libraryService.getAllGenres();
+        assertEquals(0, result.size());
+    }
 }

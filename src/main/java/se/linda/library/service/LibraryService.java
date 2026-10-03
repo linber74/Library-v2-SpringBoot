@@ -119,4 +119,8 @@ public class LibraryService {
     public List<SeriesInfo> getAllSeriesInfo(){
         return seriesInfoRepository.findAll();
     }
+
+    public List<String> getAllGenres(){
+        return libraryItemRepository.findDistinctGenres();
+    }
 }
