@@ -232,4 +232,20 @@ public class LibraryServiceTest {
         List<String> result = libraryService.getAllGenres();
         assertEquals(0, result.size());
     }
+
+    @Test
+    public void getAllLanguages_shouldReturnDistinctLanguages(){
+        when(libraryItemRepository.findDistinctLanguages())
+                .thenReturn(List.of("English", "Swedish", "Spanish"));
+        List<String> result = libraryService.getAllLanguages();
+        assertEquals(3, result.size());
+        assertEquals(List.of("English", "Swedish", "Spanish"), result);
+    }
+
+    @Test
+    public void getAllLanguages_shouldReturnEmptyList_whenNoLanguagesFound(){
+        when(libraryItemRepository.findDistinctLanguages()).thenReturn(List.of());
+        List<String> result = libraryService.getAllLanguages();
+        assertEquals(0, result.size());
+    }
 }
