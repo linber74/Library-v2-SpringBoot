@@ -16,4 +16,8 @@ public interface LibraryItemRepository extends JpaRepository<LibraryItem, Long> 
 
     @Query(value = "SELECT DISTINCT genre FROM item_genres ORDER BY genre", nativeQuery = true)
     List<String> findDistinctGenres();
+
+    @Query(value = "SELECT DISTINCT language FROM libraryitem WHERE language IS NOT NULL ORDER BY language",
+    nativeQuery = true)
+    List<String> findDistinctLanguages();
 }

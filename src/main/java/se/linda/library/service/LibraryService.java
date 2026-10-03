@@ -123,4 +123,8 @@ public class LibraryService {
     public List<String> getAllGenres(){
         return libraryItemRepository.findDistinctGenres();
     }
+
+    public List<String> getAllLanguages(){
+        return libraryItemRepository.findDistinctLanguages();
+    }
 }
