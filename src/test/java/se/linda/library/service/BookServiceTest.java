@@ -172,4 +172,19 @@ public class BookServiceTest {
         assertThrows(IllegalArgumentException.class,
                 () -> bookService.searchByFandom(""));
     }
+
+    @Test
+    public void getAllAuthors_shouldReturnDistinctAuthors() {
+        when(bookRepository.findDistinctAuthors()).thenReturn(List.of("Anne Rice", "J.K. Rowling", "Tolkien"));
+        List<String> result = bookService.getAllAuthors();
+        assertEquals(3, result.size());
+        assertEquals(List.of("Anne Rice", "J.K. Rowling", "Tolkien"), result);
+    }
+
+    @Test
+    public void getAllAuthors_shouldReturnEmptyList_whenNoAuthorsFound() {
+        when(bookRepository.findDistinctAuthors()).thenReturn(List.of());
+        List<String> result = bookService.getAllAuthors();
+        assertEquals(0, result.size());
+    }
 }
