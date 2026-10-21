@@ -93,4 +93,8 @@ public class BookService {
         log.info("Found by fandom: {}", fandom);
         return bookRepository.findByFandomContainingIgnoreCase(fandom);
     }
+
+    public List<String> getAllAuthors(){
+        return bookRepository.findDistinctAuthors();
+    }
 }

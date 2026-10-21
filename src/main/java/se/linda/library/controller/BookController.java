@@ -83,4 +83,9 @@ public class BookController {
                 .map(bookMapper :: toResponse)
                 .toList();
     }
+
+    @GetMapping ("/authors")
+    public List<String> getAllAuthors(){
+        return bookService.getAllAuthors();
+    }
 }
