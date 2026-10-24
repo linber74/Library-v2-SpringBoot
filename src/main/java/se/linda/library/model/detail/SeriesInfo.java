@@ -19,10 +19,8 @@ public class SeriesInfo {
     @Id
     private String seriesName;
 
-    private Integer partNumber;
-
     @Override
     public String toString() {
-        return "Serie: " + this.seriesName + ", Del: " + this.partNumber;
+        return "Serie: " + this.seriesName;
     }
 }

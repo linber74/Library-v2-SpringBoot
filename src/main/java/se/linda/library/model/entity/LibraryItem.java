@@ -41,6 +41,8 @@ public abstract class LibraryItem {
 
     private Integer publishYear;
 
+    private Integer partNumber;
+
     @ManyToOne
     @JoinColumn (name = "seriesName")
     private SeriesInfo seriesInfo;
