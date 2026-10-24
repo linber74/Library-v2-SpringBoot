@@ -6,16 +6,23 @@ import se.linda.library.dto.response.TVSeriesResponse;
 import se.linda.library.model.detail.SeriesInfo;
 import se.linda.library.model.entity.TVSeries;
 import se.linda.library.model.enums.ItemType;
+import se.linda.library.repository.SeriesInfoRepository;
 
 @Component
 public class TVSeriesMapper {
 
+    private final SeriesInfoRepository seriesInfoRepository;
+
+    public TVSeriesMapper(SeriesInfoRepository seriesInfoRepository) {
+        this.seriesInfoRepository = seriesInfoRepository;
+    }
+
+
     public TVSeries toEntity (TVSeriesRequest request) {
         SeriesInfo seriesInfo = null;
         if (request.seriesName() != null) {
-            seriesInfo = new SeriesInfo();
-            seriesInfo.setSeriesName(request.seriesName());
-            seriesInfo.setPartNumber(request.seriesPartNumber());
+            seriesInfo = seriesInfoRepository.findById(request.seriesName())
+                    .orElseGet(() -> seriesInfoRepository.save(new SeriesInfo(request.seriesName())));
         }
 
 
@@ -24,6 +31,7 @@ public class TVSeriesMapper {
         tvSeries.setGenre(request.genre());
         tvSeries.setLanguage(request.language());
         tvSeries.setSeriesInfo(seriesInfo);
+        tvSeries.setPartNumber(request.seriesPartNumber());
         tvSeries.setDirector(request.director());
         tvSeries.setActors(request.actors());
         tvSeries.setMediaFormat(request.mediaFormat());
@@ -38,10 +46,7 @@ public class TVSeriesMapper {
         String seriesName = tvSeries.getSeriesInfo() != null
                 ? tvSeries.getSeriesInfo().getSeriesName()
                 : null;
-        Integer seriesPartNumber = tvSeries.getSeriesInfo() != null
-                ? tvSeries.getSeriesInfo().getPartNumber()
-                : null;
-
+        Integer seriesPartNumber = tvSeries.getPartNumber();
         return new TVSeriesResponse(tvSeries.getId(), tvSeries.getTitle(),
                 tvSeries.getGenre(), tvSeries.getLanguage(), seriesName, seriesPartNumber,
                 tvSeries.getDirector(), tvSeries.getActors(),

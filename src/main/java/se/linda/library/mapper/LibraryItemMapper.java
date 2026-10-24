@@ -10,9 +10,7 @@ public class LibraryItemMapper {
         String seriesName = item.getSeriesInfo() != null
                 ? item.getSeriesInfo().getSeriesName()
                 : null;
-        Integer seriesPartNumber = item.getSeriesInfo() != null
-                ? item.getSeriesInfo().getPartNumber()
-                : null;
+        Integer seriesPartNumber = item.getPartNumber();
 
         return new LibraryItemResponse(item.getId(), item.getItemType(), item.getTitle(),
                 item.getGenre(), item.getLanguage(), seriesName, seriesPartNumber, item.getSynopsis());

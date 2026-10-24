@@ -104,16 +104,9 @@ public class LibraryService {
         libraryItemRepository.deleteById(id);
     }
 
-    public SeriesInfo getOrCreateSeriesInfo(String name, int partNumber){
-
-        Optional<SeriesInfo> existing =  seriesInfoRepository.findById(name);
-
-        if(existing.isPresent()){
-            return existing.get();
-        }else {
-            SeriesInfo newSeriesInfo = new SeriesInfo(name, partNumber);
-            return seriesInfoRepository.save(newSeriesInfo);
-        }
+    public SeriesInfo getOrCreateSeriesInfo(String name){
+        return seriesInfoRepository.findById(name)
+                .orElseGet(() -> seriesInfoRepository.save(new SeriesInfo(name)));
     }
 
     public List<SeriesInfo> getAllSeriesInfo(){

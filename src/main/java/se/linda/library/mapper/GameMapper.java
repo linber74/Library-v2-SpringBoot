@@ -6,16 +6,23 @@ import se.linda.library.dto.response.GameResponse;
 import se.linda.library.model.detail.SeriesInfo;
 import se.linda.library.model.entity.Game;
 import se.linda.library.model.enums.ItemType;
+import se.linda.library.repository.SeriesInfoRepository;
 
 @Component
 public class GameMapper {
 
+    private final SeriesInfoRepository seriesInfoRepository;
+
+    public GameMapper(SeriesInfoRepository seriesInfoRepository) {
+        this.seriesInfoRepository = seriesInfoRepository;
+    }
+
+
     public Game toEntity(GameRequest request) {
         SeriesInfo seriesInfo = null;
         if(request.seriesName() != null) {
-            seriesInfo = new SeriesInfo();
-            seriesInfo.setSeriesName(request.seriesName());
-            seriesInfo.setPartNumber(request.seriesPartNumber());
+            seriesInfo = seriesInfoRepository.findById(request.seriesName())
+                    .orElseGet(() -> seriesInfoRepository.save(new SeriesInfo(request.seriesName())));
         }
 
         Game game = new Game();
@@ -23,6 +30,7 @@ public class GameMapper {
         game.setGenre(request.genre());
         game.setLanguage(request.language());
         game.setSeriesInfo(seriesInfo);
+        game.setPartNumber(request.seriesPartNumber());
         game.setCreator(request.creator());
         game.setItemType(ItemType.GAME);
         game.setSynopsis(request.synopsis());
@@ -34,9 +42,7 @@ public class GameMapper {
         String seriesName = game.getSeriesInfo()  != null
                 ? game.getSeriesInfo().getSeriesName()
                 : null;
-        Integer seriesPartNumber = game.getSeriesInfo() != null
-                ? game.getSeriesInfo().getPartNumber()
-                : null;
+        Integer seriesPartNumber = game.getPartNumber();
 
         return new GameResponse(game.getId(), game.getTitle(),
                 game.getGenre(), game.getLanguage(),

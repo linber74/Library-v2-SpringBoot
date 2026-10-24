@@ -191,7 +191,7 @@ public class LibraryServiceTest {
         when(seriesInfoRepository.findById("Middle Earth"))
             .thenReturn(Optional.of(testSeriesInfo));
 
-        SeriesInfo result = libraryService.getOrCreateSeriesInfo("Middle Earth", 1);
+        SeriesInfo result = libraryService.getOrCreateSeriesInfo("Middle Earth");
 
         assertEquals(testSeriesInfo, result);
         verify(seriesInfoRepository, never()).save(any());
@@ -202,9 +202,9 @@ public class LibraryServiceTest {
         when(seriesInfoRepository.findById("The Elder Scroll"))
             .thenReturn(Optional.empty());
         when(seriesInfoRepository.save(any(SeriesInfo.class)))
-                .thenReturn(new SeriesInfo("The Elder Scroll", 5));
+                .thenReturn(new SeriesInfo("The Elder Scroll"));
 
-        SeriesInfo result = libraryService.getOrCreateSeriesInfo("The Elder Scroll", 5);
+        SeriesInfo result = libraryService.getOrCreateSeriesInfo("The Elder Scroll");
 
         assertEquals("The Elder Scroll", result.getSeriesName());
         verify(seriesInfoRepository).save(any(SeriesInfo.class));
