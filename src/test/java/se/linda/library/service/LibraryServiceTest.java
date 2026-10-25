@@ -248,4 +248,19 @@ public class LibraryServiceTest {
         List<String> result = libraryService.getAllLanguages();
         assertEquals(0, result.size());
     }
+
+    @Test
+    public void getAllSeriesNames_shouldReturnDistinctseries(){
+        when(seriesInfoRepository.findDistinctSeriesNames()).thenReturn(List.of("Sagan Om Ringen", "The Elder Scrolls", "Harry Potter"));
+        List<String> result = libraryService.getAllSeriesNames();
+        assertEquals(3, result.size());
+        assertEquals(List.of("Sagan Om Ringen", "The Elder Scrolls", "Harry Potter"), result);
+    }
+
+    @Test
+    public  void getAllSeriesNames_shouldReturnEmptyList_whenNoSeriesFound(){
+        when(seriesInfoRepository.findDistinctSeriesNames()).thenReturn(List.of());
+        List<String> result = libraryService.getAllSeriesNames();
+        assertEquals(0, result.size());
+    }
 }
