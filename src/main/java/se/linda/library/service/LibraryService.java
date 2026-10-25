@@ -12,7 +12,6 @@ import se.linda.library.repository.SeasonRepository;
 import se.linda.library.repository.SeriesInfoRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -119,5 +118,9 @@ public class LibraryService {
 
     public List<String> getAllLanguages(){
         return libraryItemRepository.findDistinctLanguages();
+    }
+
+    public List<String> getAllSeriesNames(){
+        return seriesInfoRepository.findDistinctSeriesNames();
     }
 }

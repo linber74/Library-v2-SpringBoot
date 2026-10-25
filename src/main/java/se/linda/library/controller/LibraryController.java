@@ -77,7 +77,7 @@ public class LibraryController {
     }
 
     @GetMapping ("/series")
-    public List<SeriesInfo> getAllSeriesInfo(){
-        return libraryService.getAllSeriesInfo();
+    public List<String> getAllSeries(){
+        return libraryService.getAllSeriesNames();
     }
 }
