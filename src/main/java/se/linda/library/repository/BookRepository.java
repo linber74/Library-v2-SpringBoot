@@ -19,4 +19,8 @@ public interface BookRepository  extends JpaRepository<Book, Long> {
     List <Book> findByBookFormat (BookFormat bookFormat);
     List <Book> findByFanficType (FanficType fanficType);
     List <Book> findByFandomContainingIgnoreCase (String fandom);
+
+    @Query(value = "SELECT DISTINCT fandom FROM book_fandoms WHERE fandom " +
+            "IS NOT NULL ORDER BY fandom", nativeQuery = true)
+    List<String> findDistinctFandoms();
 }

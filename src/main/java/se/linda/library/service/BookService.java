@@ -97,4 +97,8 @@ public class BookService {
     public List<String> getAllAuthors(){
         return bookRepository.findDistinctAuthors();
     }
+
+    public List<String> getAllFandoms(){
+        return bookRepository.findDistinctFandoms();
+    }
 }
