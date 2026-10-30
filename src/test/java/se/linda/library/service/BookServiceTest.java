@@ -187,4 +187,19 @@ public class BookServiceTest {
         List<String> result = bookService.getAllAuthors();
         assertEquals(0, result.size());
     }
+
+    @Test
+    public void getAllFandoms_shouldReturnDistinctFandom() {
+        when(bookRepository.findDistinctFandoms()).thenReturn(List.of("Criminal Minds", "Xena", "Grey's Anatomy"));
+        List<String> result = bookService.getAllFandoms();
+        assertEquals(3, result.size());
+        assertEquals(List.of("Criminal Minds", "Xena", "Grey's Anatomy"), result);
+    }
+
+    @Test
+    public void getAllFandoms_shouldReturnEmptyList_whenNoFandomsFound() {
+        when(bookRepository.findDistinctFandoms()).thenReturn(List.of());
+        List<String> result = bookService.getAllFandoms();
+        assertEquals(0, result.size());
+    }
 }

@@ -88,4 +88,9 @@ public class BookController {
     public List<String> getAllAuthors(){
         return bookService.getAllAuthors();
     }
+
+    @GetMapping("/fandoms")
+    public List<String> getAllFandoms(){
+        return bookService.getAllFandoms();
+    }
 }
