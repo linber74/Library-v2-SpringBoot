@@ -4,7 +4,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.linda.library.dto.response.LibraryItemResponse;
 import se.linda.library.mapper.LibraryItemMapper;
-import se.linda.library.model.detail.SeriesInfo;
 import se.linda.library.model.entity.LibraryItem;
 import se.linda.library.model.enums.ItemType;
 import se.linda.library.service.LibraryService;
@@ -79,5 +78,10 @@ public class LibraryController {
     @GetMapping ("/series")
     public List<String> getAllSeries(){
         return libraryService.getAllSeriesNames();
+    }
+
+    @GetMapping("/universes")
+    public List<String> getAllUniverses(){
+        return libraryService.getAllUniverseNames();
     }
 }

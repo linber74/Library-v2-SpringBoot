@@ -8,4 +8,4 @@ import java.util.List;
 public record BookResponse(Long id, String title, List<String> genre, String language,
                            String seriesName, Integer seriesPartNumber, List <String> author,
                            BookFormat bookFormat, FanficType fanficType,
-                           List <String> fandom, String synopsis) {}
+                           List <String> fandom, String universeName, String synopsis) {}

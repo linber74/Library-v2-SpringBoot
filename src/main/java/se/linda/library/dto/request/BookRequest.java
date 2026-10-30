@@ -18,4 +18,5 @@ public record BookRequest(@NotBlank(message = "Title is required") String title,
                           @NotNull(message = "Book Format is required") BookFormat bookFormat,
                           FanficType fanficType,
                           List <String> fandom,
+                          String universeName,
                           @Size(max = 1000) String synopsis) {}

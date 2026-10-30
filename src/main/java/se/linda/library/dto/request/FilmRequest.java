@@ -16,5 +16,6 @@ public record FilmRequest(@NotBlank (message = "Title is required") String title
                           @NotBlank (message = "Director is required (use 'Unknown' if not known)") String director,
                           List<String> actors,
                           @NotNull (message = "MediaFormat is required") MediaFormat mediaFormat,
+                          String universeName,
                           TranslationInfo translationInfo,
                           @Size(max = 1000) String synopsis) {}

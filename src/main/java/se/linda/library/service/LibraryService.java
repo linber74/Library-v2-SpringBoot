@@ -5,11 +5,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import se.linda.library.exception.ItemNotFoundException;
 import se.linda.library.model.detail.SeriesInfo;
+import se.linda.library.model.detail.Universe;
 import se.linda.library.model.entity.LibraryItem;
 import se.linda.library.model.enums.ItemType;
 import se.linda.library.repository.LibraryItemRepository;
 import se.linda.library.repository.SeasonRepository;
 import se.linda.library.repository.SeriesInfoRepository;
+import se.linda.library.repository.UniverseRepository;
 
 import java.util.List;
 
@@ -25,11 +27,12 @@ public class LibraryService {
     final LibraryItemRepository libraryItemRepository;
     final SeasonRepository seasonRepository;
     private final SeriesInfoRepository seriesInfoRepository;
+    private final UniverseRepository universeRepository;
 
     public LibraryService(BookService bookService, FilmService filmService,
                           TVSeriesService tvSeriesService, GameService gameService,
                           LibraryItemRepository libraryItemRepository,
-                          SeasonRepository seasonRepository, SeriesInfoRepository seriesInfoRepository) {
+                          SeasonRepository seasonRepository, SeriesInfoRepository seriesInfoRepository, UniverseRepository universeRepository) {
         this.bookService = bookService;
         this.filmService = filmService;
         this.tvSeriesService = tvSeriesService;
@@ -37,6 +40,7 @@ public class LibraryService {
         this.libraryItemRepository = libraryItemRepository;
         this.seasonRepository = seasonRepository;
         this.seriesInfoRepository = seriesInfoRepository;
+        this.universeRepository = universeRepository;
     }
 
     public List<LibraryItem> getAll(){
@@ -122,5 +126,14 @@ public class LibraryService {
 
     public List<String> getAllSeriesNames(){
         return seriesInfoRepository.findDistinctSeriesNames();
+    }
+
+    public Universe getOrCreateUniverse(String name){
+        return universeRepository.findById(name)
+                .orElseGet(() -> universeRepository.save(new Universe(name)));
+    }
+
+    public List<String> getAllUniverseNames(){
+        return universeRepository.findDistinctUniverseNames();
     }
 }

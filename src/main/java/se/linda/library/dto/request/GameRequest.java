@@ -11,5 +11,6 @@ public record GameRequest(@NotBlank (message = "Title is required") String title
                           String seriesName,
                           Integer seriesPartNumber,
                           String creator,
+                          String universeName,
                           @Size(max = 1000) String synopsis) {
 }
