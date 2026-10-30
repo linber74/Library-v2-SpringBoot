@@ -4,17 +4,21 @@ import org.springframework.stereotype.Component;
 import se.linda.library.dto.request.BookRequest;
 import se.linda.library.dto.response.BookResponse;
 import se.linda.library.model.detail.SeriesInfo;
+import se.linda.library.model.detail.Universe;
 import se.linda.library.model.entity.Book;
 import se.linda.library.model.enums.ItemType;
 import se.linda.library.repository.SeriesInfoRepository;
+import se.linda.library.repository.UniverseRepository;
 
 @Component
 public class BookMapper {
 
     private final SeriesInfoRepository seriesInfoRepository;
+    private final UniverseRepository universeRepository;
 
-    public BookMapper(SeriesInfoRepository seriesInfoRepository) {
+    public BookMapper(SeriesInfoRepository seriesInfoRepository, UniverseRepository universeRepository) {
         this.seriesInfoRepository = seriesInfoRepository;
+        this.universeRepository = universeRepository;
     }
 
     public Book toEntity (BookRequest request){
@@ -24,6 +28,12 @@ public class BookMapper {
 
             seriesInfo = seriesInfoRepository.findById(request.seriesName())
                     .orElseGet(() -> seriesInfoRepository.save(new SeriesInfo(request.seriesName())));
+        }
+
+        Universe universe = null;
+        if (request.universeName() != null){
+            universe = universeRepository.findById(request.universeName())
+                    .orElseGet(() -> universeRepository.save(new Universe(request.universeName())));
         }
 
         Book book = new Book();
@@ -37,6 +47,7 @@ public class BookMapper {
         book.setFanficType(request.fanficType());
         book.setFandom(request.fandom());
         book.setItemType(ItemType.BOOK);
+        book.setUniverse(universe);
         book.setSynopsis(request.synopsis());
 
         return book;
@@ -48,8 +59,12 @@ public class BookMapper {
                 :null;
         Integer seriesPartNumber = book.getPartNumber();
 
+        String universe = book.getUniverse() != null
+                ? book.getUniverse().getUniverseName()
+                : null;
+
         return new BookResponse(book.getId(), book.getTitle(),
                 book.getGenre(), book.getLanguage(), seriesName, seriesPartNumber, book.getAuthor(),
-                book.getBookFormat(), book.getFanficType(), book.getFandom(), book.getSynopsis());
+                book.getBookFormat(), book.getFanficType(), book.getFandom(), universe, book.getSynopsis());
     }
 }

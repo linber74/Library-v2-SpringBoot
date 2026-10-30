@@ -12,7 +12,11 @@ public class LibraryItemMapper {
                 : null;
         Integer seriesPartNumber = item.getPartNumber();
 
+        String universe = item.getUniverse() != null
+                ? item.getUniverse().getUniverseName()
+                : null;
+
         return new LibraryItemResponse(item.getId(), item.getItemType(), item.getTitle(),
-                item.getGenre(), item.getLanguage(), seriesName, seriesPartNumber, item.getSynopsis());
+                item.getGenre(), item.getLanguage(), seriesName, seriesPartNumber, universe, item.getSynopsis());
     }
 }

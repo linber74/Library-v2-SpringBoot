@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import se.linda.library.model.detail.SeriesInfo;
+import se.linda.library.model.detail.Universe;
 import se.linda.library.model.enums.ItemType;
 
 import java.util.List;
@@ -46,6 +47,10 @@ public abstract class LibraryItem {
     @ManyToOne
     @JoinColumn (name = "seriesName")
     private SeriesInfo seriesInfo;
+
+    @ManyToOne
+    @JoinColumn(name = "universeName")
+    private Universe universe;
 
     @Override
     public String toString(){

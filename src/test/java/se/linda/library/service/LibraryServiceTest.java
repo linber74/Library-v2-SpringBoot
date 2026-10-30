@@ -8,6 +8,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import se.linda.library.exception.ItemNotFoundException;
 import se.linda.library.model.detail.SeriesInfo;
+import se.linda.library.model.detail.Universe;
 import se.linda.library.model.entity.Book;
 import se.linda.library.model.entity.Game;
 import se.linda.library.model.entity.LibraryItem;
@@ -15,6 +16,7 @@ import se.linda.library.model.enums.ItemType;
 import se.linda.library.repository.LibraryItemRepository;
 import se.linda.library.repository.SeasonRepository;
 import se.linda.library.repository.SeriesInfoRepository;
+import se.linda.library.repository.UniverseRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -47,6 +49,9 @@ public class LibraryServiceTest {
     @Mock
     private SeriesInfoRepository seriesInfoRepository;
 
+    @Mock
+    private UniverseRepository universeRepository;
+
     @InjectMocks
     private LibraryService libraryService;
 
@@ -54,6 +59,7 @@ public class LibraryServiceTest {
     LibraryItem testGame;
     List<LibraryItem> testAllItems;
     SeriesInfo testSeriesInfo;
+    Universe testUniverse;
 
     @BeforeEach
     public void setUp() {
@@ -77,6 +83,9 @@ public class LibraryServiceTest {
 
         testSeriesInfo = new SeriesInfo();
         testSeriesInfo.setSeriesName("Middle Earth");
+
+        testUniverse = new Universe();
+        testUniverse.setUniverseName("The Elder Scroll");
     }
 
     @Test
@@ -261,6 +270,38 @@ public class LibraryServiceTest {
     public  void getAllSeriesNames_shouldReturnEmptyList_whenNoSeriesFound(){
         when(seriesInfoRepository.findDistinctSeriesNames()).thenReturn(List.of());
         List<String> result = libraryService.getAllSeriesNames();
+        assertEquals(0, result.size());
+    }
+
+    @Test
+    public void getOrCreateUniverse_shouldReturnExisting_whenUniverseAlreadyExists(){
+        when(universeRepository.findById("The Elder Scroll")).thenReturn(Optional.of(testUniverse));
+        Universe result = libraryService.getOrCreateUniverse("The Elder Scroll");
+        assertEquals(testUniverse, result);
+        verify(universeRepository, never()).save(any());
+    }
+
+    @Test
+    public void getOrCreateUniverse_shouldCreateNew_whenUniverseDoesNotExist(){
+        when(universeRepository.findById("The Elder Scroll")).thenReturn(Optional.empty());
+        when(universeRepository.save(any(Universe.class))).thenReturn(new Universe("The Elder Scroll"));
+        Universe result = libraryService.getOrCreateUniverse("The Elder Scroll");
+        assertEquals("The Elder Scroll", result.getUniverseName());
+        verify(universeRepository).save(any(Universe.class));
+    }
+
+    @Test
+    public void getAllUniverseNames_shouldReturnDistinctUniverses(){
+        when(universeRepository.findDistinctUniverseNames()).thenReturn(List.of("Marvel", "The Elder Scrolls"));
+        List<String> result = libraryService.getAllUniverseNames();
+        assertEquals(2, result.size());
+        assertEquals(List.of("Marvel", "The Elder Scrolls"), result);
+    }
+
+    @Test
+    public void getAllUniverseNames_shouldReturnEmptyList_whenNoUniverseFound(){
+        when(universeRepository.findDistinctUniverseNames()).thenReturn(List.of());
+        List<String> result = libraryService.getAllUniverseNames();
         assertEquals(0, result.size());
     }
 }

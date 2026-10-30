@@ -10,5 +10,6 @@ public record AudioStoryRequest(@NotBlank(message = "Title is required") String 
                                 @NotBlank (message = "Language is required") String language,
                                 @NotNull(message = "Trope genre list must not be null") List<String> tropeGenre,
                                 @NotNull(message = "Please provide the duration in seconds (e.g. 1800 for 30 minutes)")Integer durationSeconds,
+                                String universeName,
                                 @Size(max = 1000) String synopsis)
 {}
